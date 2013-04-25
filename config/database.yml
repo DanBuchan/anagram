@@ -10,11 +10,11 @@ development:
   database: anagram_development
   pool: 5
   username: root
-  password: bT33xxT8
+  password: 
   #JRuby doesn't support socket:
   #socket: /var/lib/mysql/mysql.sock
-  host: 128.16.8.143
-  port: 3306 
+  #host: 128.16.8.143
+  #port: 3306 
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -26,14 +26,14 @@ test:
   database: anagram_test
   pool: 5
   username: root
-  password: bT33xxT8
+  password: 
   #JRuby doesn't support socket:
   #socket: /var/lib/mysql/mysql.sock
-  host: 128.16.8.143
-  port: 3306
+  #host: 128.16.8.143
+  #port: 3306
 
-production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+#production:
+#  adapter: sqlite3
+#  database: db/production.sqlite3
+#  pool: 5
+#  timeout: 5000
