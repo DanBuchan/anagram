@@ -1,0 +1,64 @@
+body {
+}
+
+.inner {
+  margin: 0 0 10px;
+  padding: 10px;
+}
+
+.heading {
+  background-color: #000000;
+  margin: 0 0 10px;
+  padding: 10px;
+}
+
+.element {
+  margin: 0;
+}
+
+.uploadSuccess {
+    background: #aaffaa;
+    border: 3px;
+    border-style:solid;
+    border-color: #50af50;
+    border-radius: 15px;
+    padding: 0px 0px 0px 10px;
+}
+
+.uploadPartial {
+  background: #ffdb9b;
+  border: 3px;
+  border-style:solid;
+  border-color: #ffb12a;
+  border-radius: 15px;
+  padding: 0px 0px 0px 10px;
+}
+
+.noResult {
+  background: #ffaaaa;
+  border: 3px;
+  border-style:solid;
+  border-color: #af5050;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.anagramResult {
+  background: #aaaaff;
+  border: 3px;
+  border-style:solid;
+  border-color: #5050af;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+
+.heading h1 {
+  color: #DDDDDD;
+  font-size: 400%;
+  text-align: center;
+}
+.footer h1 {
+  color: #555555;
+  text-align: center;
+}

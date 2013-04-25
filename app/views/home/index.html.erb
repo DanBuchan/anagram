@@ -1,0 +1,75 @@
+
+<div class="container">
+    
+	
+    <header class="row">
+        <div class="span12">
+            <div class="heading">
+                <h1>Anagram Solver</h1>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Yo Dawg I Herd U LIK MUDKIPS -->
+
+    <!-- Dictionary upload widget -->
+    <div class="row">
+        <div class="span1">
+        </div>
+        <div class="span11">
+            <div>
+                <h3>Upload Dictionary</h3>
+            </div>
+        </div>        
+    </div>
+
+    <div class="row">
+        <div class="span1">
+        </div>
+        <div class="span10">
+            <div id="dict">
+                <form class="form-inline" id="dictionaryUpload" action="javascript: uploadDictionary()">
+                <input class="input-large" id="dictionary" name="dictionary" size="30" type="file" />&nbsp;&nbsp;&nbsp;<a class="btn" href="javascript: uploadDictionary()">Submit!</a>
+                </form>
+            </div>
+        </div>
+        <div class="span1">
+        </div>
+    </div>
+
+    <!-- Anagram Query widget -->
+    <div role="main" class="row">
+        <div class="span1">
+        </div>
+        <div class="span11">
+            <h3>Search for Anagrams</h3>
+        </div>
+        
+    </div>
+    
+    <div role="main" class="row">
+        <div class="span1">
+        </div>
+        <div class="span11">
+            <form class="form-inline" id="anagramRequest" action="javascript: requestAnagrams()">
+                <input class="input-large" id="word" name="word" size="30" type="text" />&nbsp;&nbsp;&nbsp;<a class="btn" href="javascript: requestAnagrams()">Get Anagrams!</a>
+            </form>
+        </div>
+    </div>
+        
+    <div role="main" class="row">
+        <div class="span1">
+        </div>
+        <div class="span10">
+            <div>
+                <h3>Results:</h3>
+            </div>
+            <div id="anagramResults">
+            </div>
+        </div>
+        <div class="span1">
+        </div>
+        
+    </div>
+<!-- /container -->
+</div>
