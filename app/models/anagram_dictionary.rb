@@ -8,6 +8,15 @@ class AnagramDictionary < ActiveRecord::Base
     #because we shouldn't store the same word twice really
 
     def self.insert_many(words)
+	
+	#Ooops forgot that the design brief said don't use 3rd party libraries to load the
+	#mysql. Leaving this here to remind me that this is an awesome way to do it
+    #aWords.each_with_index do |word|
+	#    sorted = word.chars.sort { |a, b| a.casecmp(b) }.join
+    #    anagrams << self.new(:sortedword => sorted, :word => word)
+    #end
+    #insert_count = self.import anagrams, :validate => true
+	
 	insert_count = 0
         ActiveRecord::Base.transaction do
             words.each do |word|
