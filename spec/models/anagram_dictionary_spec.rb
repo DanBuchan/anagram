@@ -15,7 +15,7 @@ describe AnagramDictionary do
     end
     it "is invalid if word is not alphabetical" do
         FactoryGirl.build(:anagram_dictionary, word: "123456").should_not be_valid
-        #Could add more tests of punctuation and so forth here
+        #Could/should add more tests of string with punctuation and so forth here
     end
     
     it "does not allow duplicate words to be inserted" do

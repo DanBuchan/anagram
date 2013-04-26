@@ -17,6 +17,11 @@ class AnagramDictionary < ActiveRecord::Base
     #end
     #insert_count = self.import anagrams, :validate => true
 	
+	#we wrap all our object creation in one transaction to limit
+	#the number of times we hit the db. Alternatively we could
+	#just write raw SQL for greater speed gains but then you lose
+	#data validations. Which is why activerecord-import would have been
+	#nice to use
 	insert_count = 0
         ActiveRecord::Base.transaction do
             words.each do |word|

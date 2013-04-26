@@ -7,8 +7,7 @@ General architecture
 --------------------
 Make the rails app as thin as possible and put as much display logic in the webpage as possible. The rails app is really just a restful/ajax api for uploading a dictionary and retreiving anagrams.
 
-This makes the view logic very simple at the expense of making the javascript on the webpage more complex. Would mean you can build non-browser based apps against the api
-more easily of course.
+This makes the view logic very simple at the expense of making the javascript on the webpage more complex. Would mean you can build non-browser based apps against the api more easily of course.
 
 DB design & anagram finding algorithm
 -------------------------------------
