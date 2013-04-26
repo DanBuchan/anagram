@@ -34,6 +34,9 @@ Frontend
 --------
 a) we're stringifying the dictionary and not using an http post. This currently limits the dictionary upload size to the http request maximum size. Also the stringifying process inserts it's own delimiter which is potentially fragile if you want to support arbitrary user dictionaries which contain punctuation
 b) the frontend does not handle errors especially well. Nothing happens if the dictionary fails to load
+c) Load timings happen in the javascript rather than having any calculation done by rails. This means that the total time from the user event, network response,
+rails code and the db load are included. Instead of just say having the rails
+app reply with the time it takes the db to load, which is only partially relevant to the timing the use has to interact with..
 
 VERY VERY large dictionary issues:
 ----------------------------------
