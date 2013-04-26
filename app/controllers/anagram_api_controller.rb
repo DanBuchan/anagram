@@ -4,13 +4,20 @@ class AnagramApiController < ApplicationController
     def create_dictionary
         #Here we load the dictionary and at the end we return a chunk of json to report success
         text = params[:dictionary]
-        aWords = text.split(",")
+        aWords = text.split("\n")
         @dictionary = AnagramDictionary.new()
         
         #use activerecord-import so we only have to do a single db transaction
         anagrams = []
         total_words = aWords.length
-	    
+	#Ooops forgot that the design brief said don't use 3rd party libraries to load the
+	#mysql. Leaving this here to remind me that this is an awesome way to do it
+        #aWords.each_with_index do |word,i|
+	#    sorted = word.chars.sort { |a, b| a.casecmp(b) }.join
+        #    anagrams << AnagramDictionary.new(:sortedword => sorted, :word => word)
+        #end
+        #insert_count = AnagramDictionary.import anagrams, :validate => true
+        
 	insert_count = AnagramDictionary::insert_many(aWords)	
 	failed_instances = total_words - insert_count
 	

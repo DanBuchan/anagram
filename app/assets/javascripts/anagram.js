@@ -11,14 +11,17 @@ function uploadDictionary()
     reader.onload = function(event) {
         
         var content = event.target.result;
-        content = content.replace(/\n/g, ",");
+        //content = content.replace(/\n/g, ",");
         var ajaxTime= new Date().getTime();
         $.ajax({
-            type: "GET",
+            //type: "GET",
+	    type: "POST",
+            contentType:  "multipart/form-data",
             url: "/anagram_api/create_dictionary.json",
             cache: false,
             dataType:'json',
             data: 'dictionary=' + content,
+            //data: content,
             async:  false,
             success: function(data)
             {

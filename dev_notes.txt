@@ -7,11 +7,11 @@ General architecture
 --------------------
 Make the rails app as thin as possible and put as much display logic in the webpage as possible. The rails app is really just a restful/ajax api for uploading a dictionary and retreiving anagrams.
 
-This makes the view logic very simple at the expense of making the javascript on the webpage more complex. Would mean you can build non-browser based apps against the api more easily of course.
+This makes the view logic very simple at the expense of making the javascript on the webpage more teeny bit more complex. Would mean you can build non-browser based apps against the api more easily of course.
 
 DB design & anagram finding algorithm
 -------------------------------------
-So the anagram finding algorithm I've chosen was to just to sort every word in the dictionary on the understanding that any two words with the same sorted string are anagrams of one another. Sorted words can then be used as keys which identify bags of anagrams. There are obviously many ways to implement this but the obvious one is to pre-calculate the sorts on database load and associate them to the dictionary words.
+So the anagram finding algorithm I've chosen was to just to sort every word in the dictionary on the understanding that any two words with the same sorted string are anagrams of one another. Sorted words can then be used as keys which identify bags of anagrams. There are obviously many ways to implement this but the obvious one is to pre-calculate the sorts upon database load and associate them to the dictionary words.
 
 Initially and in keeping with good normalisation practice I'd intended to support 2 db tables, a table of sorted words and a table of the dictionary words each associated with a foreign key which points at the appropriate sorted string. Something like this:
 
@@ -32,17 +32,14 @@ Not strictly normalised but we are storing fewer data points in toto. This is fa
 
 Frontend
 --------
-a) we're stringifying the dictionary and not using an http post. This currently limits the dictionary upload size to the http request maximum size. Also the stringifying process inserts it's own delimiter which is potentially fragile if you want to support arbitrary user dictionaries which contain punctuation
-b) the frontend does not handle errors especially well. Nothing happens if the dictionary fails to load
-c) Load timings happen in the javascript rather than having any calculation done by rails. This means that the total time from the user event, network response,
+Load timings happen in the javascript rather than having any calculation done by rails. This means that the total time from the user event, network response,
 rails code and the db load are included. Instead of just say having the rails
 app reply with the time it takes the db to load, which is only partially relevant to the timing the use has to interact with..
 
 VERY VERY large dictionary issues:
 ----------------------------------
-a) We would have to drop the frontend reading and stringifying the dictionary and switch the file upload from a GET to a POST.
-b) Calculating the sorted words and the database population step may become time consuming. If there are plenty of cores on the server box you could split the dictionary and fork child processes the sorts in parallel. Or if we're talking millions of words/ngrams a map-reduce cluster such as HADOOP would be very efficient at this sort of task.
-c) The database look up is probably fairly resilient to dictionary size as long as we are only interested in the anagrams of single words. The the OED contains ~220,000 words, well within the efficient table lookup size for most db packages. However extending to n-gram look ups such as di- or tri-grams then we quickly enter the realms of many, many millions of rows. This might be ameliorated a little by excluding grammatically incorrect word pairings but this is non-trivial. Most 'verb verb' pairs are likely grammatically invalid but many 'noun noun' pairings are completely fine such as "green grass". Inflected words greatly increase the complexity of this kind of task and a full solution is probably not possible/tractable.
-d) This is a mostly just a key-value look up task so a better alternative would be to move to some efficient key-value store such as redis or cassandra.
-e) Lastly, if you really wanted to support massive dictionaries and arbitrary n-grams it would likely be best to take extant large dictionaries, pre-calculate the sorted words/ngrams and pre-load this data rather than make the user sit through some long data upload process. As mentioned above; a task ideal for things like HADOOP or OGE.
-f) Also once loaded any kind of in memory db table would be great idea.
+a) Calculating the sorted words and the database population step may become time consuming. If there are plenty of cores on the server box you could split the dictionary and fork child processes the sorts in parallel. Or if we're talking millions of words/ngrams a map-reduce cluster such as HADOOP would be very efficient at this sort of task.
+b) The database look up is probably fairly resilient to dictionary size as long as we are only interested in the anagrams of single words. The the OED contains ~220,000 words, well within the efficient table lookup size for most db packages. However extending to n-gram look ups such as di- or tri-grams then we quickly enter the realms of many, many millions of rows. This might be ameliorated a little by excluding grammatically incorrect word pairings but this is non-trivial. Most 'verb verb' pairs are likely grammatically invalid but many 'noun noun' pairings are completely fine such as "green grass". Inflected words greatly increase the complexity of this kind of task and a full solution is probably not possible/tractable.
+c) This is a mostly just a key-value look up task so a better alternative would be to move to some efficient key-value store such as redis or cassandra.
+d) Lastly, if you really wanted to support massive dictionaries and arbitrary n-grams it would likely be best to take extant large dictionaries, pre-calculate the sorted words/ngrams and pre-load this data rather than make the user sit through some long data upload process. As mentioned above; a task ideal for things like HADOOP or OGE.
+e) Also once loaded any kind of in memory db table would be great idea.

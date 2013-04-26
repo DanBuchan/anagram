@@ -8,21 +8,21 @@ describe AnagramApiController do
         _expected << {"message" => "we good"}.to_json
         
         it "returns http success" do
-            get "create_dictionary", :format => :json, :dictionary => "three,tree"
+            get "create_dictionary", :format => :json, :dictionary => "three\ntree"
             #puts response.body.inspect
             #puts response.status.inspect
             response.should be_success
         end
         
         it "returns the success response for valid data" do
-            get "create_dictionary", :format => :json, :dictionary => "three,tree"
+            get "create_dictionary", :format => :json, :dictionary => "three\ntree"
             
             message = JSON.parse(response.body)
             message.should == _expected 
         end
         
         it "returns the partial insert response for invalid data" do
-            get "create_dictionary", :format => :json, :dictionary => "three,1234"
+            get "create_dictionary", :format => :json, :dictionary => "three\n1234"
             message = JSON.parse(response.body)
             message.should_not == _expected
         end
