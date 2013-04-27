@@ -11,11 +11,11 @@ class AnagramDictionary < ActiveRecord::Base
 	
 	#Ooops forgot that the design brief said don't use 3rd party libraries to load the
 	#mysql. Leaving this here to remind me that this is an awesome way to do it
-    #aWords.each_with_index do |word|
+        #aWords.each_with_index do |word|
 	#    sorted = word.chars.sort { |a, b| a.casecmp(b) }.join
-    #    anagrams << self.new(:sortedword => sorted, :word => word)
-    #end
-    #insert_count = self.import anagrams, :validate => true
+        #    anagrams << self.new(:sortedword => sorted, :word => word)
+        #end
+        #insert_count = self.import anagrams, :validate => true
 	
 	#we wrap all our object creation in one transaction to limit
 	#the number of times we hit the db. Alternatively we could
