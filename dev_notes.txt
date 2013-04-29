@@ -36,6 +36,8 @@ Load timings happen in the javascript rather than having any calculation done by
 rails code and the db load are included. Instead of just say having the rails
 app reply with the time it takes the db to load, which is only partially relevant to the timing the use has to interact with..
 
+Worth noting that the home controller probably doesn't need to exists we could just serve the front page from /public
+
 VERY VERY large dictionary issues:
 ----------------------------------
 a) Calculating the sorted words and the database population step may become time consuming. If there are plenty of cores on the server box you could split the dictionary and fork child processes the sorts in parallel. Or if we're talking millions of words/ngrams a map-reduce cluster such as HADOOP would be very efficient at this sort of task.
