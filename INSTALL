@@ -1,6 +1,7 @@
 1) bundle install
 	Depending on your OS, good luck with nokogiri and execjs!
 2) Edit the conf/database.yml to point at a valid mysql db for both test and development
+	Don't forget the user password if needed
 3) rake db:create:all
 4) rake db:migrate
 3) test with
