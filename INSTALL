@@ -4,6 +4,6 @@
 3) rake db:create:all
 4) rake db:migrate
 3) test with
-	rake rspec
+	rake spec
 4) start with, natch
 	rails s
