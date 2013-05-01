@@ -1,54 +1,34 @@
 require 'spec_helper'
 
 describe AnagramApiController do
-
-    describe "GET create_dictionary" do
-        
-        _expected = []
-        _expected << {"message" => "we good"}.to_json
-        
-        it "returns http success" do
-            get "create_dictionary", :format => :json, :dictionary => "three\ntree"
-            #puts response.body.inspect
-            #puts response.status.inspect
-            response.should be_success
-        end
-        
-        it "returns the success response for valid data" do
-            get "create_dictionary", :format => :json, :dictionary => "three\ntree"
-            
-            message = JSON.parse(response.body)
-            message.should == _expected 
-        end
-        
-        it "returns the partial insert response for invalid data" do
-            get "create_dictionary", :format => :json, :dictionary => "three\n1234"
-            message = JSON.parse(response.body)
-            message.should_not == _expected
-        end
-    end
-
-    describe "GET get_anagrams" do
-        
-        _expected = []
-        _expected << {"word" => "three"}.to_json
+	
+	let(:word)              { "three" }
+    let(:sortedword)        { "eehrt" }
+    let(:invalid_word)      { "blart" }
+    let(:expected)          { _expected = []; _expected << {"word" => word}.to_json}
+	let(:get_show)          { get "show", :format => :json, :word => word }
+	let(:create_dictionary) { AnagramDictionary.create(:sortedword => sortedword,:word => word ) } 
+	let(:get_anagram)       { get :show, :format => :json, :word => word }
+	let(:no_anagram)        { get :show, :format => :json, :word => invalid_word }
+	
+	describe "GET :show" do
         
         it "returns http success" do
-            get :get_anagrams, :format => :json, :word => 'three'
-            response.should be_success
+			get_show
+			response.should be_success
         end
         
         it "returns word list on sucessful query" do
-            AnagramDictionary.create(:sortedword => 'eehrt',:word => 'three')
-            get :get_anagrams, :format => :json, :word => 'three'
+			create_dictionary
+            get_anagram
             message = JSON.parse(response.body)
-            message.should == _expected
+            message.should == expected
         end
         
         it "returns no words on unsucessful query" do
-            AnagramDictionary.create(:sortedword => 'eehrt',:word => 'three')
-            get :get_anagrams, :format => :json, :word => 'blarg'
-            message = JSON.parse(response.body)
+			create_dictionary
+            no_anagram
+			message = JSON.parse(response.body)
             message.should == []
         end
     end

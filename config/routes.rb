@@ -51,9 +51,9 @@ Anagram::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'home#index'
-  match '/anagram_api/create_dictionary' => 'anagram_api#create_dictionary' , :constraints => {:format => /(json)/}
-  match '/anagram_api/get_anagrams' => 'anagram_api#get_anagrams', :constraints => {:format => /(json)/}
-
+  match '/dictionary_api/create' => 'dictionary_api#create' , :constraints => {:format => /(json)/}
+  match '/anagram_api/show' => 'anagram_api#show', :constraints => {:format => /(json)/}
+  
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

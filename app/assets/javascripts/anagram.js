@@ -17,7 +17,7 @@ function uploadDictionary()
             //type: "GET",
 	    type: "POST",
             contentType:  "multipart/form-data",
-            url: "/anagram_api/create_dictionary.json",
+            url: "/dictionary_api/create.json",
             cache: false,
             dataType:'json',
             data: 'dictionary=' + content,
@@ -39,18 +39,18 @@ function uploadDictionary()
                 var OK = pattern.exec(message); 
                 if (!OK)
                 {
-                    document.getElementById("dict").innerHTML="<div class=\"uploadPartial\"><h4 id=\"uploadTime\">Dictionary Uploaded. "+message+". </h4><p>These words may already be in the dictionary or may be invalid. Please ensure all words in your dictionary do not contain numbers or punctuation</p></div>";
+                    $('#dict')[0].innerHTML="<div class=\"uploadPartial\"><h4 id=\"uploadTime\">Dictionary Uploaded. "+message+". </h4><p>These words may already be in the dictionary or may be invalid. Please ensure all words in your dictionary do not contain numbers or punctuation</p></div>";
 
                 }
                 else
                 {
-                    document.getElementById("dict").innerHTML="<div class=\"uploadSuccess\"><h4 id=\"uploadTime\">Dictionary Upload Success!</h4></div>";
+                    $('#dict')[0].innerHTML="<div class=\"uploadSuccess\"><h4 id=\"uploadTime\">Dictionary Upload Success!</h4></div>";
                 }
                 
             }
         }).done(function () {
             var totalTime = new Date().getTime()-ajaxTime;
-            document.getElementById("uploadTime").innerHTML+="&nbsp;Uploaded in "+totalTime+"ms";
+            $('#uploadTime')[0].innerHTML+="&nbsp;Uploaded in "+totalTime+"ms";
         }); //End of Ajax
         //alert(content)
         return content
@@ -65,7 +65,7 @@ function requestAnagrams()
     var ajaxTime= new Date().getTime();
     $.ajax({
         type: "GET",
-        url: "/anagram_api/get_anagrams.json",
+        url: "/anagram_api/show.json",
         cache: false,
         dataType:'json',
         data: 'word=' + word,
@@ -84,12 +84,12 @@ function requestAnagrams()
             var totalTime = new Date().getTime()-ajaxTime;
             if(response.length == 0)
             {
-            document.getElementById("anagramResults").innerHTML="<div class=\"noResult\">Query string <h4>"+word+"</h4> found no anagrams <br />Response time was "+totalTime+"ms.</div><br />"+document.getElementById("anagramResults").innerHTML;
+	            $('#anagramResults')[0].innerHTML="<div class=\"noResult\">Query string <h4>"+word+"</h4> found no anagrams <br />Response time was "+totalTime+"ms.</div><br />"+$('#anagramResults')[0].innerHTML;
             }
             else
             {
-            document.getElementById("anagramResults").innerHTML="<div class=\"anagramResult\">Query string <h4>"+word+"</h4> found the following anagrams: <br /><h4>"+words_string+"</h4>Response time was "+totalTime+"ms.</div><br />"+document.getElementById("anagramResults").innerHTML;
-           }
+           		$('#anagramResults')[0].innerHTML="<div class=\"anagramResult\">Query string <h4>"+word+"</h4> found the following anagrams: <br /><h4>"+words_string+"</h4>Response time was "+totalTime+"ms.</div><br />"+$('#anagramResults')[0].innerHTML;
+		   }
         }
         }); //End of Ajax
     //alert(content)
