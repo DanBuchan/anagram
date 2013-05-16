@@ -1,7 +1,3 @@
-Sunday 3 hrs dev time
-Monday 4 hrs dev time
-Wednesday 2 hrs
-Tuesday 1hr of refactoring
 
 General architecture
 --------------------
