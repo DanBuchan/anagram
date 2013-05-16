@@ -7,6 +7,7 @@ describe AnagramApiController do
     let(:invalid_word)      { "blart" }
     let(:expected)          { _expected = []; _expected << {"word" => word}.to_json}
 	let(:get_show)          { get "show", :format => :json, :word => word }
+	#should switch this let to before()
 	let(:create_dictionary) { AnagramDictionary.create(:sortedword => sortedword,:word => word ) } 
 	let(:get_anagram)       { get :show, :format => :json, :word => word }
 	let(:no_anagram)        { get :show, :format => :json, :word => invalid_word }
